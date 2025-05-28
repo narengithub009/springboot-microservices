@@ -20,6 +20,7 @@ public class Routes {
 
     @Bean
     public RouterFunction<ServerResponse> productServiceRoute(){
+        
         return route("product-service")
                 .route(RequestPredicates.path("/api/product"), HandlerFunctions.http("http://localhost:8080"))
                 .filter(CircuitBreakerFilterFunctions.circuitBreaker("productServiceCircuitBreaker",
@@ -83,6 +84,5 @@ public class Routes {
 
                 return ServerResponse.status(HttpStatus.SERVICE_UNAVAILABLE)
                         .body("Service unavailable, please try again");}).build();
-
     }
 }
